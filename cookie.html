@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Background Color Saver</title>
+</head>
+
+<?php
+if(isset($_POST['txtColor']))
+{
+echo"<body bgcolor=".$_POST['txtColor']."></body>";
+setcookie('color',$_POST['txtColor'],time()+60*60*24*30,'/','');
+}
+?>
+
+<body>
+<h1>Background Color Saver</h1>
+<form method="post">
+Enter Color Name: <input type="text" name="txtColor">
+<button> SAVE</button>
+</form>
+</body>
+</html>

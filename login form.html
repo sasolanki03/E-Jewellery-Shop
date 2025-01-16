@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .login-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-form">
+    <h2>Login Form</h2>
+    <form id="form" onsubmit="return validateForm()">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <div id="usernameError" class="error"></div>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <div id="passwordError" class="error"></div>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        // Clear previous error messages
+        document.getElementById("usernameError").innerText = "";
+        document.getElementById("passwordError").innerText = "";
+
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+
+        // Check if both fields are blank
+        if (username === "" && password === "") {
+            document.getElementById("usernameError").innerText = "Username and Password cannot be blank.";
+            return false;
+        }
+
+        // Validate username
+        const usernameRegex = /^[^\d_@#].*$/; // Does not start with digit, _, @, or #
+        if (!usernameRegex.test(username)) {
+            document.getElementById("usernameError").innerText = "Username must not start with a digit, _, @, or #.";
+            return false;
+        }
+
+        // Validate password length
+        if (password.length < 8 || password.length > 16) {
+            document.getElementById("passwordError").innerText = "Password must be between 8 and 16 characters.";
+            return false;
+        }
+
+        // If all validations pass
+        return true;
+    }
+</script>
+
+</body>
+</html>
